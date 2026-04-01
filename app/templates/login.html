@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Login - Event Booking{% endblock %}
+{% block content %}
+  <section class="card">
+    <h2>Student Login</h2>
+    <form method="post" action="{{ url_for('login_page') }}">
+      <label>Username
+        <input type="text" name="username" required />
+      </label>
+      <label>Password
+        <input type="password" name="password" required />
+      </label>
+      <button type="submit">Login</button>
+    </form>
+  </section>
+{% endblock %}

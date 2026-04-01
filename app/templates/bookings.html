@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}My Bookings - Event Booking{% endblock %}
+{% block content %}
+  <section class="card">
+    <h2>My Bookings</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Event</th>
+          <th>Seats</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for booking in bookings %}
+          <tr>
+            <td>{{ booking.id }}</td>
+            <td>{{ booking.event.name }}</td>
+            <td>{{ booking.seats }}</td>
+            <td>
+              <form method="post" action="{{ url_for('cancel_booking_page', booking_id=booking.id) }}" class="inline-form">
+                <button type="submit">Cancel</button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="4">No bookings yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}

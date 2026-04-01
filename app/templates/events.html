@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Events - Event Booking{% endblock %}
+{% block content %}
+  <section class="card">
+    <h2>Available Events</h2>
+    <form method="get" action="{{ url_for('events_page') }}" class="inline-form">
+      <input type="text" name="q" value="{{ request.args.get('q', '') }}" placeholder="Search events" />
+      <button type="submit">Search</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Available Seats</th>
+          <th>Book</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in events %}
+          <tr>
+            <td>{{ event.id }}</td>
+            <td>{{ event.name }}</td>
+            <td>{{ event.available_seats }}</td>
+            <td>
+              <form method="post" action="{{ url_for('book_event_page', event_id=event.id) }}" class="inline-form">
+                <input type="number" name="seats" value="1" min="1" />
+                <button type="submit">Book</button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="4">No events found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}
